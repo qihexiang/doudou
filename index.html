@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>豆豆和鸟鸟</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        hr {
+            width: 80%;
+            color: silver;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #app {
+            height: 100vh;
+            width: 100vw;
+        }
+
+        #avatar {
+            border-radius: 50%;
+            box-shadow: 0 0 1rem #FD7CC3;
+        }
+
+        #card {
+            box-shadow: 0 0 2rem silver;
+            border-radius: 2rem;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        #body {
+            color: #FFC546;
+        }
+
+        #footer {
+            color: #FD7CC3;
+        }
+
+        @media screen and (min-aspect-ratio: 1) and (min-width: 1024px) {
+            #card {
+                font-size: 1.5vw;
+                width: 30vw;
+            }
+
+            #avatar {
+                width: 10vw;
+                height: 10vw;
+            }
+
+            #body {
+                font-size: 5vw;
+            }
+        }
+
+        @media screen and (min-aspect-ratio: 1) and (max-width: 1024px) {
+            #card {
+                font-size: 2vw;
+                width: 50vw;
+            }
+
+            #avatar {
+                width: 10vw;
+                height: 10vw;
+            }
+
+            #body {
+                font-size: 10vw;
+            }
+        }
+
+        @media screen and (max-aspect-ratio: 1) and (min-height: 480px) {
+            #card {
+                font-size: 2vh;
+                width: 90vw;
+            }
+
+            #avatar {
+                width: 30vw;
+                height: 30vw;
+            }
+
+            #body {
+                font-size: 10vh;
+            }
+
+        }
+
+        @media screen and (max-aspect-ratio: 1) and (max-height: 480px) {
+            #card {
+                font-size: 1vh;
+                width: 90vw;
+            }
+
+            #avatar {
+                width: 30vw;
+                height: 30vw;
+            }
+
+            #body {
+                font-size: 5vh;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <div id="card" class="container">
+            <div id="header" class="container">
+                <img id="avatar" src="./avatar.png">
+                <p>今天是豆豆和鸟鸟在一起的第：</p>
+            </div>
+            <div id="body" class="container">
+                <p><span id="counter"></span>天</p>
+            </div>
+            <div id="footer" class="container">
+                <p>2020/07/09 ❤ <span id="now"></span></p>
+            </div>
+        </div>
+</body>
+
+<script type="module">
+    const start = new Date("2020-11-07")
+    let now = new Date()
+    const counterText = document.getElementById("counter")
+    const nowText = document.getElementById("now")
+    const update = () => {
+        counterText.innerText = Math.floor((now.getTime() - start.getTime()) / (24 * 60 * 60 * 1000)) + 1
+        nowText.innerText = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`
+    }
+    update()
+    setInterval(() => {
+        now = new Date()
+        update()
+    }, 1000)
+</script>
+
+</html>
