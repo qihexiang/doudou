@@ -232,10 +232,12 @@
             document.getElementById("footer").append(doc)
         } else if (lastDays <= 14) {
             const doc = document.createElement('p')
-            doc.innerText = `还有${lastDays}就是豆豆和鸟鸟的${years}周年纪念日啦！`
+            doc.innerHTML = `<strong>还有${lastDays}就是豆豆和鸟鸟的${years}周年纪念日啦！</strong>`
             document.getElementById("footer").append(doc)
         } else {
-            document.getElementById("footer").title = `距离豆豆和鸟鸟的${years}周年纪念日还有${lastDays}天！`
+            const doc = document.createElement('p')
+            doc.innerText = `距离豆豆和鸟鸟的${years}周年纪念日还有${lastDays}天！`
+            document.getElementById("footer").append(doc)
         }
     }
     const monthly = () => {
