@@ -162,6 +162,7 @@
             <hr>
             <div id="footer" class="container">
                 <p>2020/11/07 ❤ <span id="now"></span></p>
+                <p id="anniversary"></p>
             </div>
         </div>
 </body>
@@ -171,12 +172,9 @@
         day: 86400000, hour: 3600000, minute: 60000, second: 1000, millisecond: 1
     }
     const items = ['days', 'hours', 'minutes', 'seconds', 'milliseconds']
-    const start = new Date(2020, 10, 7, 21, 0, 0)
+    const start = new Date(2020, 10, 7)
     let now = new Date()
     const doc = {}
-    items.forEach(item => {
-        doc[item] = document.getElementById(item)
-    })
     const funcs = {
         days: (future, past) => {
             const passed = future - past
@@ -212,31 +210,38 @@
             return result
         }
     }
-    const update = () => {
-        now = new Date()
-        items.forEach(item => {
-            doc[item].innerText = funcs[item](now, start)
-        })
-        document.getElementById('now').innerText = `${now.getFullYear()}/${now.getMonth() + 1 >= 10 ? now.getMonth() + 1 : '0' + String(now.getMonth() + 1)}/${now.getDate() >= 10 ? now.getDate() : '0' + String(now.getDate())}`
+    items.forEach(item => {
+        doc[item] = document.getElementById(item)
+        doc[item].innerText = funcs[item](now, start)
+    })
+    function update(item) {
+        const oldValue = doc[item].innerText
+        const newValue = funcs[item](now, start)
+        if(Number(oldValue) >= Number(newValue)) {
+            const itemIndex = items.indexOf(item)
+            if(itemIndex != 0) {
+                update(items[itemIndex - 1])
+            } else {
+                updateNow()
+                anniversary()
+                monthly()
+            }
+        }
+        doc[item].innerText = newValue
     }
     const anniversary = () => {
         let anni
-        if (now <= new Date(now.getFullYear(), 10, 7)) anni = new Date(now.getFullYear(), 10, 7)
+        if (now <= new Date(now.getFullYear(), 10, 8)) anni = new Date(now.getFullYear(), 10, 7)
         else anni = new Date(now.getFullYear() + 1, 10, 7)
         const lastDays = Number(funcs.days(anni, now)) - 1
-        const years = now.getFullYear() - start.getFullYear()
+        const years = anni.getFullYear() - start.getFullYear()
+        const doc = document.getElementById("anniversary")
         if (lastDays == 0) {
-            const doc = document.createElement('p')
-            doc.innerText = `今天是豆豆和鸟鸟的${years}周年纪念日！`
-            document.getElementById("footer").append(doc)
+            doc.innerHTML = `今天是豆豆和鸟鸟的<strong>${years}</strong>周年纪念日！`
         } else if (lastDays <= 14) {
-            const doc = document.createElement('p')
-            doc.innerHTML = `<strong>还有${lastDays}就是豆豆和鸟鸟的${years}周年纪念日啦！</strong>`
-            document.getElementById("footer").append(doc)
+            doc.innerHTML = `还有<strong>${lastDays}天</strong>就是豆豆和鸟鸟的<strong>${years}周年</strong>纪念日啦！`
         } else {
-            const doc = document.createElement('p')
             doc.innerText = `距离豆豆和鸟鸟的${years}周年纪念日还有${lastDays}天！`
-            document.getElementById("footer").append(doc)
         }
     }
     const monthly = () => {
@@ -248,9 +253,17 @@
             document.getElementById("footer").append(doc)
         }
     }
+    const updateNow = () => {
+        const nowDoc = document.getElementById("now")
+        nowDoc.innerText = `${now.getFullYear()}/${now.getMonth() + 1 >= 10 ? String(now.getMonth() + 1) : '0' + String(now.getMonth() + 1)}/${now.getDate() >= 10 ? String(now.getDate()) : '0' + String(now.getDate())}`
+    }
+    updateNow()
     anniversary()
     monthly()
-    setInterval(update, 10)
+    setInterval(() => {
+        now = new Date()
+        update('milliseconds')
+    }, 10)
 </script>
 
 </html>
