@@ -150,13 +150,14 @@
             </div>
             <hr>
             <div id="body" class="container">
-                <p>豆豆和鸟鸟已经在一起：</p>
-                <p class="days"><span id="days"></span>天</p>
+                <p>今天是豆豆和鸟鸟在一起的</p>
+                <p class="days">第<span id="days"></span>天</p>
                 <p>
                     <span id="hours"></span>小时
                     <span id="minutes"></span>分钟
                     <span id="seconds"></span>秒
-                    <span id="mili"></span></p>
+                    <span id="milliseconds"></span>
+                </p>
             </div>
             <hr>
             <div id="footer" class="container">
@@ -165,33 +166,88 @@
         </div>
 </body>
 
-<script type="module">
+<script>
+    const CONSTANT = {
+        day: 86400000, hour: 3600000, minute: 60000, second: 1000, millisecond: 1
+    }
+    const items = ['days', 'hours', 'minutes', 'seconds', 'milliseconds']
     const start = new Date(2020, 10, 7, 21, 0, 0)
     let now = new Date()
-    const daysText = document.getElementById("days")
-    const hoursText = document.getElementById("hours")
-    const minutesText = document.getElementById("minutes")
-    const secondsText = document.getElementById("seconds")
-    const miliText = document.getElementById("mili")
-    const nowText = document.getElementById("now")
-    const update = () => {
-        const days = Math.floor((now - start) / (24 * 60 * 60 * 1000)) + 1
-        const hours = now.getHours() + 3
-        const minutes = now.getMinutes()
-        const seconds = now.getSeconds()
-        const miliseconds = now.getMilliseconds()
-        daysText.innerText = days
-        hoursText.innerText = hours >= 10 ? hours : '0' + String(hours)
-        minutesText.innerText = minutes >= 10 ? minutes : '0' + String(minutes)
-        secondsText.innerText = seconds >= 10 ? seconds : '0' + String(seconds)
-        miliText.innerText = miliseconds >= 100 ? miliseconds : (miliseconds >= 10 ? '0' + String(miliseconds) : '00' + String(miliseconds))
-        nowText.innerText = `${now.getFullYear()}/${now.getMonth() + 1 >= 10 ? now.getMonth() + 1 : '0' + String(now.getMonth() + 1)}/${now.getDate() >= 10 ? now.getDate() : '0' + String(now.getDate())}`
-    }
-    update()
-    setInterval(() => {
-        now = new Date()
-        update()
+    const doc = {}
+    items.forEach(item => {
+        doc[item] = document.getElementById(item)
     })
+    const funcs = {
+        days: (future, past) => {
+            const passed = future - past
+            const days = (passed - passed % CONSTANT.day) / CONSTANT.day + 1
+            return String(days)
+        },
+        hours: (future, past) => {
+            const passed = (future - past) % CONSTANT.day
+            const hours = (passed - passed % CONSTANT.hour) / CONSTANT.hour
+            let result = String(hours);
+            if (hours < 10) result = '0' + result
+            return result
+        },
+        minutes: (future, past) => {
+            const passed = (future - past) % CONSTANT.day % CONSTANT.hour
+            const minutes = (passed - passed % CONSTANT.minute) / CONSTANT.minute
+            let result = String(minutes)
+            if (minutes < 10) result = '0' + result
+            return result
+        },
+        seconds: (future, past) => {
+            const passed = (future - past) % CONSTANT.day % CONSTANT.hour % CONSTANT.minute
+            const seconds = (passed - passed % CONSTANT.second) / CONSTANT.second
+            let result = String(seconds)
+            if (seconds < 10) result = '0' + result
+            return result
+        },
+        milliseconds: (future, past) => {
+            const passed = (future - past) % CONSTANT.day % CONSTANT.hour % CONSTANT.minute % CONSTANT.second
+            let result = String(passed)
+            if (passed < 10) result = '0' + result
+            if (passed < 100) result = '0' + result
+            return result
+        }
+    }
+    const update = () => {
+        now = new Date()
+        items.forEach(item => {
+            doc[item].innerText = funcs[item](now, start)
+        })
+        anniversary()
+        document.getElementById('now').innerText = `${now.getFullYear()}/${now.getMonth() + 1 >= 10 ? now.getMonth() + 1 : '0' + String(now.getMonth() + 1)}/${now.getDate() >= 10 ? now.getDate() : '0' + String(now.getDate())}`
+    }
+    const anniversary = () => {
+        let anni
+        if (now <= new Date(now.getFullYear(), 10, 7)) anni = new Date(now.getFullYear(), 10, 7)
+        else anni = new Date(now.getFullYear() + 1, 10, 7)
+        const lastDays = Number(funcs.days(anni, now)) - 1
+        const years = now.getFullYear() - start.getFullYear()
+        if (lastDays == 0) {
+            const doc = document.createElement('p')
+            doc.innerText = `今天是豆豆和鸟鸟的${years}周年纪念日！`
+            document.getElementById("footer").append(doc)
+        } else if (lastDays <= 14) {
+            const doc = document.createElement('p')
+            doc.innerText = `还有${lastDays}就是豆豆和鸟鸟的${years}周年纪念日啦！`
+            document.getElementById("footer").append(doc)
+        } else {
+            document.getElementById("footer").title = `距离豆豆和鸟鸟的${years}周年纪念日还有${lastDays}天！`
+        }
+    }
+    const monthly = () => {
+        if (now.getDate() == start.getDate()) {
+            const fullYearMonths = (now.getFullYear() - start.getFullYear() - 1) * 12
+            const restMonths = now.getMonth() + 2
+            const doc = document.createElement('p')
+            doc.innerText = `鸟鸟和豆豆在一起${fullYearMonths + restMonths}个月啦！`
+            document.getElementById("footer").append(doc)
+        }
+    }
+    setInterval(update, 10)
 </script>
 
 </html>
