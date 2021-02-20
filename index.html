@@ -16,7 +16,7 @@
 
         hr {
             width: 80%;
-            color: silver;
+            color: whitesmoke;
         }
 
         p {
@@ -69,7 +69,7 @@
                 height: 8vw;
             }
 
-            #body {
+            .days {
                 font-size: 5vw;
             }
         }
@@ -85,7 +85,7 @@
                 height: 12vw;
             }
 
-            #body {
+            .days {
                 font-size: 5vw;
             }
         }
@@ -101,7 +101,7 @@
                 height: 20vw;
             }
 
-            #body {
+            .days {
                 font-size: 10vw;
             }
         }
@@ -117,7 +117,7 @@
                 height: 25vw;
             }
 
-            #body {
+            .days {
                 font-size: 10vh;
             }
 
@@ -134,7 +134,7 @@
                 height: 30vw;
             }
 
-            #body {
+            .days {
                 font-size: 10vh;
             }
 
@@ -148,9 +148,17 @@
             <div id="header" class="container">
                 <img id="avatar" src="./256x256.png">
             </div>
+            <hr>
             <div id="body" class="container">
-                <p><span id="counter"></span>天</p>
+                <p>豆豆和鸟鸟已经在一起：</p>
+                <p class="days"><span id="days"></span>天</p>
+                <p>
+                    <span id="hours"></span>小时
+                    <span id="minutes"></span>分钟
+                    <span id="seconds"></span>秒
+                    <span id="mili"></span></p>
             </div>
+            <hr>
             <div id="footer" class="container">
                 <p>2020/11/07 ❤ <span id="now"></span></p>
             </div>
@@ -158,33 +166,32 @@
 </body>
 
 <script type="module">
-    const start = new Date("2020-11-07")
+    const start = new Date(2020, 10, 7, 21, 0, 0)
     let now = new Date()
-    const counterText = document.getElementById("counter")
+    const daysText = document.getElementById("days")
+    const hoursText = document.getElementById("hours")
+    const minutesText = document.getElementById("minutes")
+    const secondsText = document.getElementById("seconds")
+    const miliText = document.getElementById("mili")
     const nowText = document.getElementById("now")
     const update = () => {
-        counterText.innerText = Math.floor(
-            (
-                (new Date(
-                    now.getFullYear(),
-                    now.getMonth(),
-                    now.getDate()
-                ))
-                    .getTime() - start.getTime()
-            ) / (24 * 60 * 60 * 1000)
-        ) + 1
-        const month = (() => {
-            const numberMonth = now.getMonth() + 1
-            if(numberMonth < 10) return '0' + String(numberMonth)
-            else return String(numberMonth)
-        })()
-        nowText.innerText = `${now.getFullYear()}/${month}/${now.getDate()}`
+        const days = Math.floor((now - start) / (24 * 60 * 60 * 1000)) + 1
+        const hours = now.getHours() + 3
+        const minutes = now.getMinutes()
+        const seconds = now.getSeconds()
+        const miliseconds = now.getMilliseconds()
+        daysText.innerText = days
+        hoursText.innerText = hours >= 10 ? hours : '0' + String(hours)
+        minutesText.innerText = minutes >= 10 ? minutes : '0' + String(minutes)
+        secondsText.innerText = seconds >= 10 ? seconds : '0' + String(seconds)
+        miliText.innerText = miliseconds >= 100 ? miliseconds : (miliseconds >= 10 ? '0' + String(miliseconds) : '00' + String(miliseconds))
+        nowText.innerText = `${now.getFullYear()}/${now.getMonth() + 1 >= 10 ? now.getMonth() + 1 : '0' + String(now.getMonth() + 1)}/${now.getDate() >= 10 ? now.getDate() : '0' + String(now.getDate())}`
     }
     update()
     setInterval(() => {
         now = new Date()
         update()
-    }, 1000)
+    })
 </script>
 
 </html>
