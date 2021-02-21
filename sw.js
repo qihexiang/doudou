@@ -1,6 +1,6 @@
-const cacheName = 'doudou'
+const cacheName = 'doudouv2'
 const cacheFiles = [
-    './index.html', './256x256.png'
+    './', './doudou.js', './style.css', './media.css' ,'./256x256.png'
 ]
 self.addEventListener('install', event => {
     event.waitUntil(
