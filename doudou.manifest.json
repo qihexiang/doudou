@@ -3,8 +3,8 @@
     "short_name": "豆豆和鸟鸟",
     "display": "standalone",
     "start_url": "/doudou/",
-    "theme_color": "#FD7CC3",
-    "background_color": "#FD7CC3",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
     "icons": [
         {
             "src": "./16x16.png",
