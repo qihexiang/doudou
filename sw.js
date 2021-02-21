@@ -1,4 +1,4 @@
-const cacheName = 'doudouv2'
+const cacheName = 'doudouv3'
 const cacheFiles = [
     './', './doudou.js', './style.css', './media.css' ,'./256x256.png'
 ]

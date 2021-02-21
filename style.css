@@ -26,12 +26,6 @@ p {
     width: 100vw;
 }
 
-#avatar {
-    margin: 2rem;
-    border-radius: 50%;
-    box-shadow: 0 0 2rem #FA7366;
-}
-
 #card {
     box-shadow: 0 0 2rem silver;
     border-radius: 2rem;
