@@ -1,5 +1,13 @@
-if('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js')
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js', {
+        scope: './'
+    }).then(function (registration) {
+        // Registration was successful
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function (err) {
+        // registration failed :(
+        console.log('ServiceWorker registration failed: ', err);
+    });
 }
 const CONSTANT = {
     day: 86400000, hour: 3600000, minute: 60000, second: 1000, millisecond: 1
@@ -50,9 +58,9 @@ items.forEach(item => {
 function update(item) {
     const oldValue = doc[item].innerText
     const newValue = funcs[item](now, start)
-    if(Number(oldValue) >= Number(newValue)) {
+    if (Number(oldValue) >= Number(newValue)) {
         const itemIndex = items.indexOf(item)
-        if(itemIndex != 0) {
+        if (itemIndex != 0) {
             update(items[itemIndex - 1])
         } else {
             updateNow()
