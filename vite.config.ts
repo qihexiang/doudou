@@ -15,7 +15,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['./doudou.png'],
       manifest: {
-        start_url: "https://qihexiang.github.io/doudou",
+        start_url: "https://qihexiang.github.io/doudou/",
         name: '豆豆和鸟鸟的日子',
         short_name: '豆豆和鸟鸟',
         description: '豆豆和鸟鸟的纪念日！',

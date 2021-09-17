@@ -123,7 +123,7 @@ define("./sw.js",['./workbox-8536cd5f'], function (workbox) { 'use strict';
     "revision": "e94b040819d7a37a87975135dc6e6adb"
   }, {
     "url": "manifest.webmanifest",
-    "revision": "c2c2f5414f0b1990d8af442039931d9b"
+    "revision": "4b9743cb1d6bcf16a0c6aac2241275e9"
   }], {});
   workbox.cleanupOutdatedCaches();
   workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("index.html")));
