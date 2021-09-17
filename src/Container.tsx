@@ -12,24 +12,19 @@ export const Container = (props: { children: JSX.Element[] | JSX.Element | null,
 const makeBestLayout = (size: { height: number, width: number }): CSSProperties => {
     const { height, width } = size;
     if (height > width) {
-        const bestWidth = getBestWidth(width)
+        const zoom = calcZoom(width)
         return {
-           width: bestWidth, maxHeight: "90%", display: "grid"
+           width: alignTo8px(width * zoom), height: alignTo8px(height * zoom), display: "grid"
         }
     } else {
         return {
-            display: "grid", gridTemplateColumns: "repeat(3, 33.3%)" ,width: alignTo8px(width * 0.9), maxWidth: 960, maxHeight: 640, flexDirection: "row"
+            display: "grid", gridTemplateColumns: "repeat(3, 33.3%)" ,width: alignTo8px(width * 0.9)
         }
     }
 }
 
-const getBestWidth = (windowWidth: number) => {
-    const responsiveWidth =
-        (windowWidth >= 1440 && windowWidth * 0.2) ||
-        (windowWidth >= 1024 && windowWidth * 0.3) ||
-        (windowWidth >= 768 && windowWidth * 0.6) ||
-        (windowWidth * 0.8)
-    return alignTo8px(responsiveWidth)
+const calcZoom = (width: number) => {
+    return (width <= 640 && 0.8) || 0.64
 }
 
 const alignTo8px = (responsiveWidth: number) => {
