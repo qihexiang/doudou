@@ -19,7 +19,7 @@ export const Anniversary = (props: { now: Date }) => {
     const isTheDay = props.now.getMonth() === 10 && props.now.getDate() === 7;
     const year = props.now.getFullYear() + Number(props.now.getMonth() >= 10 && props.now.getDate() > 7)
     const nextAnniversary = new Date(`${year}-11-07`);
-    const days = Math.floor((nextAnniversary.getTime() - props.now.getTime()) / (24 * 3600 * 1000))
+    const days = Math.floor((nextAnniversary.getTime() - props.now.getTime()) / (24 * 3600 * 1000)) + 1
     return (
         <div style={{ color: "#ec407a", textAlign: "center", margin: "16px 0", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <div>2020/11/07 ❤ {formatDate(props.now, "yyyy/MM/dd")}</div>

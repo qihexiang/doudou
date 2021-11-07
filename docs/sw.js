@@ -107,14 +107,14 @@ define("./sw.js",['./workbox-8536cd5f'], function (workbox) { 'use strict';
     "url": "assets/index.08fbfe68.css",
     "revision": "0741ee476a77c263132f68d561f4a5dc"
   }, {
-    "url": "assets/index.e1d3f607.js",
-    "revision": "dcb27ae47fc958c7781e47975647eda7"
+    "url": "assets/index.3ed97730.js",
+    "revision": "09fd55c0d0e50966897b6db856c9179f"
   }, {
     "url": "assets/vendor.32126698.js",
     "revision": "efe3773977699ef9ec957f49a0bc8b60"
   }, {
     "url": "index.html",
-    "revision": "ebedfa2ab14e8948404d242e91a9d251"
+    "revision": "478d43b78cd5669dc7801920fc49e743"
   }, {
     "url": "./doudou.png",
     "revision": "e94b040819d7a37a87975135dc6e6adb"
