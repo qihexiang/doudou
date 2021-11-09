@@ -2,7 +2,7 @@ import React from "react"
 import { format as formatDate } from "date-fns"
 
 export const Days = (props: { now: Date }) => {
-    const start = new Date("2020-11-07");
+    const start = new Date("2020-11-07T00:00:00+08:00");
     const days = Math.floor((props.now.getTime() - start.getTime()) / (24 * 3600 * 1000))
     return (
         <div style={{
