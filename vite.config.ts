@@ -15,6 +15,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['./goose.png'],
       manifest: {
+        display: "fullscreen",
         start_url: "./doudou/",
         name: '豆豆和鸟鸟的日子',
         short_name: '豆豆和鸟鸟',
