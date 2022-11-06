@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import reactRefresh from '@vitejs/plugin-react-refresh'
+import react from "@vitejs/plugin-react"
 import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vitejs.dev/config/
@@ -9,11 +9,11 @@ export default defineConfig({
   },
   base: "/doudou/",
   plugins: [
-    reactRefresh(),
+    react(),
     VitePWA({
       mode: "development",
       registerType: 'autoUpdate',
-      includeAssets: ['./doudou.png'],
+      includeAssets: ['./goose.png'],
       manifest: {
         start_url: "./doudou/",
         name: '豆豆和鸟鸟的日子',
@@ -22,7 +22,7 @@ export default defineConfig({
         lang: "zh-CN",
         theme_color: '#ffffff',
         icons: (['16', '32', '48', '64', '96', '128', '192', '256', '512']).map((size) => ({
-          src: 'doudou.png',
+          src: 'goose.png',
           sizes: `${size}x${size}`,
           type: 'image/png',
           purpose: "any maskable"

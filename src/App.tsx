@@ -8,11 +8,11 @@ function App() {
   const fullScreen = {height: "100vh", width: "100vw"}
   const now = useNow();
   return (
-    <div className="App" style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", backgroundColor: "#eff0f1", ...fullScreen}}>
+    <div className="App" style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", backgroundImage: `url(/doudou/cherryblossom.jpg)`, backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover", ...fullScreen}}>
       <Container style={{
-        borderTop: "16px solid #ec407a", boxShadow: "0 0 16px silver"
+        borderTop: "16px solid #ec407a", borderBottom: "16px solid #ec407a", boxShadow: "0 0 16px grey", borderRadius: 4, backgroundImage: "url(/doudou/otter.jpg)", backgroundRepeat: "no-repeat", backgroundPosition: "right bottom", backgroundSize: "20%"
       }}>
-        <Avatar imageUrl="/doudou/doudou.png" />
+        <Avatar imageUrl="/doudou/goose.png" />
         <Days now={now} />
         <Anniversary now={now} />
       </Container>

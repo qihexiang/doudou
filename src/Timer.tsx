@@ -24,7 +24,7 @@ export const Anniversary = (props: { now: Date }) => {
         <div style={{ color: "#ec407a", textAlign: "center", margin: "16px 0", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <div>2020/11/07 ❤ {formatDate(props.now, "yyyy/MM/dd")}</div>
             {props.now.getDate() === 7 ? <div>鸟鸟和豆豆在一起{(props.now.getFullYear() - 2020 - 1) * 12 + props.now.getMonth() + 2}个月啦</div> : null}
-            <div>{isTheDay ? "今天是" : "距离"}豆豆和鸟鸟的{year - 2020}周年纪念日{isTheDay ? null : `还有${days}天`}！</div>
+            <div>{isTheDay ? "今天是" : "距离"}{year - 2020}周年纪念日{isTheDay ? null : `还有${days}天`}！</div>
         </div>
     )
 }
