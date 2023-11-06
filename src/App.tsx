@@ -16,8 +16,8 @@ function App() {
         <Avatar imageUrl="/doudou/goose.png" />
         <Days now={now} />
         <Anniversary now={now} />
-        <img src="/otter.jpg" width={44} height={44} style={{objectFit: "contain", position: "absolute", left: 0, bottom: 0}}></img>
-        <img src="/collaboration.gif" width={44} height={44} style={{objectFit: "contain", position: "absolute", right: 0, bottom: 0}}></img>
+        <img src="/doudou/otter.jpg" width={44} height={44} style={{objectFit: "contain", position: "absolute", left: 0, bottom: 0}}></img>
+        <img src="/doudou/collaboration.gif" width={44} height={44} style={{objectFit: "contain", position: "absolute", right: 0, bottom: 0}}></img>
       </Container>
     </div>
   )
